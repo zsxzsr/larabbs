@@ -14,9 +14,18 @@ class TopicsController extends Controller
         $this->middleware('auth', ['except' => ['index', 'show']]);
     }
 
-	public function index()
+	public function index(Request $request)
 	{
-		$topics = Topic::with('user', 'category')->paginate(30);
+        $query =Topic::with('user', 'category');
+        if($request->order) {
+            if($request->order=='default'){
+                $query->orderBy('updated_at','DESC');
+            }  else {
+                $query->orderBy('created_at','DESC');
+            }
+
+        }
+        $topics = $query->paginate(20);
 		return view('topics.index', compact('topics'));
 	}
 
