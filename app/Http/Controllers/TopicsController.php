@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\TranslateTest;
 use App\Models\Topic;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -62,7 +63,7 @@ class TopicsController extends Controller
 	{
 		$this->authorize('update', $topic);
 		$topic->update($request->all());
-
+        dispatch(new TranslateTest($topic));
 		return redirect()->route('topics.show', $topic->id)->with('message', 'Updated successfully.');
 	}
 
