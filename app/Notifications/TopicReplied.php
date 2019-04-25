@@ -32,7 +32,7 @@ class TopicReplied extends Notification
     public function via($notifiable)
     {
         // 开启通知的频道
-        return ['database'];
+        return ['database','mail'];
     }
 
     /**
@@ -43,10 +43,11 @@ class TopicReplied extends Notification
      */
     public function toMail($notifiable)
     {
+        $url = route('topics.show',$this->reply->topic_id);
+
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+            ->line('你的话题有新回复！')
+            ->action('查看回复', $url);
     }
 
     /**
