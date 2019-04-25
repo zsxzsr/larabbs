@@ -50,3 +50,6 @@ Route::post('upload_image', 'TopicsController@uploadImage')->name('topics.upload
 
 //帖子回复
 Route::resource('replies', 'RepliesController', ['only' => ['store','destroy']]);
+
+//帖子回复路由
+Route::resource('notifications', 'NotificationsController', ['only' => ['index']]);
