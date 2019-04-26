@@ -89,10 +89,10 @@ class User extends Authenticatable implements MustVerifyEmailContract
     public function setAvatarAttribute($path){
         //如果不是http开头，就是后台上传的
         if(! starts_with('http',$path)){
-
             //拼接完整 url
             $path = config('app.url') . "/uploads/images/avatars/$path";
         }
         $this->attributes['avatar']=$path;
     }
+    
 }
