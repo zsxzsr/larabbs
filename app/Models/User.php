@@ -92,7 +92,8 @@ class User extends Authenticatable implements MustVerifyEmailContract
             //拼接完整 url
             $path = config('app.url') . "/uploads/images/avatars/$path";
         }
+
         $this->attributes['avatar']=$path;
     }
-    
+
 }
